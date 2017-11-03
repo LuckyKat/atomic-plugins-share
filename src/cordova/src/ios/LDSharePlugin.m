@@ -15,12 +15,15 @@ static NSDictionary * errorToDic(NSError * error)
     
 }
 
--(void) share:(NSString *) text image:(UIImage*) image callbackId:(NSString*) callbackId
+-(void) share:(NSString *) text image:(UIImage*) image url:(NSURL*) url callbackId:(NSString*) callbackId
 {
     NSMutableArray *items = [NSMutableArray new];
     [items addObject:text];
     if (image) {
         [items addObject:image];
+    }
+    if (url) {
+        [items addObject:url];
     }
     UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
     // Exclude activities that are irrelevant
@@ -92,8 +95,11 @@ static NSDictionary * errorToDic(NSError * error)
     NSString * text = [dic objectForKey:@"message"];
     NSString * imageName = [dic objectForKey:@"image"];
     UIImage * image = [self getImage:imageName];
+    NSString * urlName = [dic objectForKey:@"url"];
+    NSURL * url = [NSURL URLWithString:urlName];
+
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self share:text image:image callbackId:command.callbackId];
+        [self share:text image:image url:url callbackId:command.callbackId];
     });
     
 }

@@ -40,6 +40,7 @@
          * @property {object}  data               - The data to share
          * @property {string}  data.message       - The message that will be shared.
          * @property {string}  data.image         - The image that will be shared. It can be a URL or a base64 image.
+         * @property {string}  data.url           - The url that will be shared.
          * @param callback {function} callback. The callback params called when share completed or dimissed. Params: activity, completed, error
          * @example
          * Cocoon.Share.share({
