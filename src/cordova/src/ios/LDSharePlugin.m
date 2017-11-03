@@ -96,8 +96,10 @@ static NSDictionary * errorToDic(NSError * error)
     NSString * imageName = [dic objectForKey:@"image"];
     UIImage * image = [self getImage:imageName];
     NSString * urlName = [dic objectForKey:@"url"];
-    NSURL * url = [NSURL URLWithString:urlName];
-
+    NSURL * url = nil;
+    if (urlName) {
+        url = [NSURL URLWithString:urlName];
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self share:text image:image url:url callbackId:command.callbackId];
     });
